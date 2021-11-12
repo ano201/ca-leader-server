@@ -89,7 +89,6 @@ async function run() {
             const result = await reviewCollection.insertOne(rating);
             res.json(result);
         })
-
         app.get('/review', async (req, res) => {
             const cursor = reviewCollection.find({});
             const rating = await cursor.toArray();
