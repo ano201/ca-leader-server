@@ -21,6 +21,7 @@ async function run() {
         const productsCollection = database.collection("Products");
         const orderedCollection = database.collection("Orders");
         const adminsCollection = database.collection("Admins");
+        const reviewCollection = database.collection("Review");
 
 
         app.get('/products', async (req, res) => {
@@ -81,6 +82,20 @@ async function run() {
             const result = await admin.toArray();
             res.json(result);
         })
+
+        //review............
+        app.post('/review', async (req, res) => {
+            const rating = req.body;
+            const result = await reviewCollection.insertOne(rating);
+            res.json(result);
+        })
+
+        app.get('/review', async (req, res) => {
+            const cursor = reviewCollection.find({});
+            const rating = await cursor.toArray();
+            res.json(rating);
+        })
+
     }
     finally {
         // await clint.close();
