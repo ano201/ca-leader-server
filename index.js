@@ -84,6 +84,11 @@ async function run() {
         })
 
         //review...........
+        app.post('/products', async (req, res) => {
+            const product = req.body;
+            const result = await productsCollection.insertOne(product);
+            res.json(result);
+        })
         app.post('/review', async (req, res) => {
             const rating = req.body;
             const result = await reviewCollection.insertOne(rating);
